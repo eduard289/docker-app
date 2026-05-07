@@ -1,7 +1,7 @@
 import streamlit as st
 import time
 
-st.set_page_config(page_title="Docker Docente", page_icon="🐳", layout="centered")
+st.set_page_config(page_title="Docker Demo", page_icon="🐳", layout="centered")
 
 st.title("🐳 Docker Demo")
 st.markdown("### Aprende a construir y entender contenedores")
@@ -61,11 +61,11 @@ Status: Downloaded newer image
 8f1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t
 
 ✅ ¡Éxito! Contenedor ejecutándose en segundo plano.
-🌐 Debería estar accesible en: http://localhost:{puerto_mostrar}
+🌐 Ejecución en: http://localhost:{puerto_mostrar}
             """, language="bash")
             
             st.balloons()
-            st.success("Esto es una simulación de lo que verías en tu terminal real.")
+            st.success("Compilación comandos en terminal.")
 
 # --- SECCIÓN 3: DOCKER COMPOSE Y EXPLICACIONES ---
 st.divider()
