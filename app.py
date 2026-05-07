@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Docker Docente", page_icon="🐳", layout="centered")
 
-st.title("🐳 Docker Docente")
+st.title("🐳 Docker Demo")
 st.markdown("### Aprende a construir y entender contenedores")
 
 # --- SECCIÓN 1: GENERADOR DE DOCKERFILES ---
