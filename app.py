@@ -37,7 +37,7 @@ if comando.startswith("docker run"):
 # --- SECCIÓN 3: DOCKER COMPOSE Y EXPLICACIONES ---
 st.divider()
 st.header("3. Generador de Docker Compose")
-st.write("¿Tienes varios contenedores (ej. una Web y una Base de Datos)? Orquístalos con `docker-compose.yml`.")
+st.write("¿Tienes varios contenedores? Orquístalos con `docker-compose.yml`.")
 
 stack = st.selectbox("Elige tu Stack (Conjunto de tecnologías):", ["Python + Redis (Caché rápida)", "Node.js + PostgreSQL (Base de datos relacional)"])
 
@@ -58,13 +58,11 @@ services:
 """
     st.code(compose_code, language="yaml")
     
-    with st.expander("📖 ¿Qué hace exactamente este archivo? (Haz clic para leer)"):
+    with st.expander("📖 ¿Qué hace exactamente este archivo?"):
         st.markdown("""
-        * **`version: '3.8'`**: Indica la versión del formato de Compose.
-        * **`services:`**: Aquí definimos las "máquinas" que vamos a encender. En este caso son dos: `web` y `cache`.
-        * **`build: .`**: Le dice al servicio `web` que busque el `Dockerfile` en esta misma carpeta y construya la imagen.
-        * **`depends_on:`**: Crea un orden de encendido. Le dice a Docker: *"No arranques la web hasta que la caché de Redis esté lista"*.
-        * **`image: redis:alpine`**: El servicio `cache` no necesita un Dockerfile propio, simplemente descarga la imagen oficial de Redis ya hecha de internet.
+        * **`services:`**: Define las máquinas virtuales que se encenderán juntas: `web` y `cache`.
+        * **`depends_on:`**: Asegura que la caché de Redis se inicie antes que la aplicación web.
+        * **`image: redis:alpine`**: Descarga una imagen oficial y ligera de Redis sin necesidad de un Dockerfile propio.
         """)
 
 elif stack == "Node.js + PostgreSQL (Base de datos relacional)":
@@ -76,15 +74,12 @@ services:
       - "3000:3000"
     environment:
       - DB_HOST=db
-      - DB_USER=usuario
-      - DB_PASS=secreta
     depends_on:
       - db
 
   db:
     image: postgres:15-alpine
     environment:
-      - POSTGRES_USER=usuario
       - POSTGRES_PASSWORD=secreta
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -94,10 +89,16 @@ volumes:
 """
     st.code(compose_code, language="yaml")
     
-    with st.expander("📖 ¿Qué hace exactamente este archivo? (Haz clic para leer)"):
+    with st.expander("📖 ¿Qué hace exactamente este archivo?"):
         st.markdown("""
-        * **`environment:`**: Inyecta variables de entorno (como contraseñas) de forma segura en los contenedores. Fíjate que la `api` se conecta a la base de datos usando `DB_HOST=db` (el nombre del servicio funciona como una dirección IP interna mágica en Docker).
-        * **`volumes:`**: Al final del archivo se crea un volumen llamado `postgres_data`. Esto es vital: si apagas el contenedor de PostgreSQL, los datos de tus usuarios **no se borrarán**, quedarán guardados en ese volumen para la próxima vez que lo enciendas.
+        * **`environment:`**: Configura variables de entorno como contraseñas de forma segura.
+        * **`volumes:`**: Crea persistencia de datos. Si el contenedor se apaga, la base de datos no se borra.
+        * **Red Interna:** Docker crea automáticamente una red privada donde la `api` puede hablar con la `db` usando solo su nombre.
         """)
 
-st.success("🚀 **Tip para tu vídeo:** Muestra cómo al desplegar un `docker-compose.yml`, todos los servicios se conectan automáticamente a la misma red interna de Docker, lo que garantiza seguridad y privacidad entre ellos.")
+# --- FOOTER PERSONALIZADO ---
+st.markdown("---")
+st.markdown(
+    "<div style='text-align: center; color: grey;'>Diseñado por Jose Luis Asenjo</div>", 
+    unsafe_allow_html=True
+)
