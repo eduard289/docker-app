@@ -70,7 +70,7 @@ Status: Downloaded newer image
 # --- SECCIÓN 3: DOCKER COMPOSE Y EXPLICACIONES ---
 st.divider()
 st.header("3. Generador de Docker Compose")
-st.write("¿Tienes varios contenedores? Orquístalos con `docker-compose.yml`.")
+st.write("¿Tienes varios contenedores? Orquestalos con `docker-compose.yml`.")
 
 stack = st.selectbox("Elige tu Stack (Conjunto de tecnologías):", ["Python + Redis (Caché rápida)", "Node.js + PostgreSQL (Base de datos relacional)"])
 
