@@ -34,19 +34,3 @@ Generación de manifiestos YAML para la gestión de topologías complejas. Se en
 * **Persistencia Gestionada:** Definición de volúmenes compartidos para sistemas de bases de datos (PostgreSQL, Redis).
 
 ---
-
-## 3. Arquitectura del Proyecto
-
-El software ha sido desarrollado bajo un paradigma de micro-aplicación utilizando el stack **Streamlit**, lo que garantiza una interfaz reactiva sin sobrecarga de estado en el servidor.
-
-```text
-.
-├── app.py              # Lógica principal y motor de procesamiento de texto
-├── requirements.txt    # Dependencias del entorno (Streamlit, etc.)
-└── Dockerfile          # Instrucciones para la autocontenerización del proyecto
-
-## 4. Despliegue e Instalación
-Requisitos previos
-Docker Engine instalado.
-
-Python 3.10+ (para ejecución local sin contenedor).
